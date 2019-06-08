@@ -27,8 +27,8 @@ private slots:
 
 private:
     Ui::jsonQtNotes *ui;
-    QString         id;
-    QString         email;
+    QString         *id;
+    QString         *email;
 };
 
 #endif // JSONQTNOTES_H

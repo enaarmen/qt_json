@@ -57,18 +57,16 @@ void jsonQtNotes::on_connection_clicked()
 
 bool jsonQtNotes::CheckLogin(QJsonDocument & json, QString email, QString password)
 {
-    int count = 0;
-
     for (auto it = json.array().begin(); it != json.array().end(); ++it) {
         qDebug() << "iterateur:" << (*it);
         QJsonObject json = (*it).toObject();
         if (!json.value("email").toString().compare(email) && !json.value("password").toString().compare(password)) {
-            this->id = json["_id"].toString();
-            this->email = json["email"].toString();
+            this->id = new QString(json["_id"].toString());
+            this->email = new QString(json["email"].toString());
             qDebug() << "dans le if";
             return (true);
-        }
-        ++count;
+        } else
+            qDebug() << "iterator:" << *it << "doesn't match";
     }
     return(false);
 }
