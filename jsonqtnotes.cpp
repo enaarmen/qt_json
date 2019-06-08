@@ -66,7 +66,7 @@ bool jsonQtNotes::CheckLogin(QJsonDocument & json, QString email, QString passwo
             qDebug() << "dans le if";
             return (true);
         } else
-            qDebug() << "iterator:" << *it << "doesn't match";
+            qDebug() << "iterator:" << (*it).toObject() << "doesn't match";
     }
     return(false);
 }
