@@ -44,17 +44,18 @@ void jsonQtNotes::ConnectOrthoJsonByAllOtrhos(QString email, QString password)
     //qDebug() << "is empty:" << json_document[0]["_id"].toString();
 
     //ui->connection_get->setText(json_document.toJson());
+    reply->deleteLater();
     if (CheckLogin(json_document, email, password)) {
         qDebug() << "got:" << email << "connected";
+        PrintPatients();
     } else
         qDebug() << "bad connection";
-    reply->deleteLater();
 }
 
 void jsonQtNotes::PrintPatients()
 {
     if (this->id && this->email) {
-        QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_patient_by_ortho/" + QString(*this->id))));
+        QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_patients_by_ortho/" + *this->id)));
         QNetworkAccessManager *q_network_manager = new QNetworkAccessManager(this);
         QNetworkReply *reply;// = q_network_manager.get(request);
 
