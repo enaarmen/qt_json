@@ -44,11 +44,12 @@ void jsonQtNotes::ConnectOrthoJsonByAllOtrhos(QString email, QString password)
     //qDebug() << "is empty:" << json_document[0]["_id"].toString();
 
     //ui->connection_get->setText(json_document.toJson());
-    reply->deleteLater();
+
     if (CheckLogin(json_document, email, password)) {
         qDebug() << "got:" << email << "connected";
     } else
         qDebug() << "bad connection";
+    //reply->deleteLater();
 }
 
 void jsonQtNotes::PrintPatients()
@@ -82,6 +83,8 @@ void jsonQtNotes::on_connection_clicked()
 
 bool jsonQtNotes::CheckLogin(QJsonDocument & json_document, QString & email, QString & password)
 {
+    if (json_document.array().begin() == json_document.array().end())
+        return (false);
     for (auto it = json_document.array().begin(); it != json_document.array().end(); ++it) {
         qDebug() << "iterateur:" << (*it);
         QJsonObject json = (*it).toObject();
