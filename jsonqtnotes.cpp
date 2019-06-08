@@ -51,7 +51,7 @@ void jsonQtNotes::ConnectOrthoJsonByAllOtrhos(QString email, QString password)
 
 void jsonQtNotes::on_connection_clicked()
 {
-    qDebug() << "recuperation des infos email: " << ui->email->toPlainText() << "et email:" << ui->email->toPlainText();
+    qDebug() << "recuperation des infos email: " << ui->email->toPlainText() << "et password:" << ui->email->toPlainText();
     ConnectOrthoJsonByAllOtrhos(ui->email->toPlainText(), ui->password->toPlainText());
 }
 
