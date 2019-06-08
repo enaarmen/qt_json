@@ -27,6 +27,8 @@ jsonQtNotes::~jsonQtNotes()
 void jsonQtNotes::ConnectOrthoJsonByAllOtrhos(QString email, QString password)
 {
     //QJsonObject json;
+    if (this->id && this->email)
+        return ;
     QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_all_ortho")));
     QNetworkAccessManager *q_network_manager = new QNetworkAccessManager(this);
     QNetworkReply *reply;// = q_network_manager.get(request);
@@ -52,7 +54,7 @@ void jsonQtNotes::ConnectOrthoJsonByAllOtrhos(QString email, QString password)
 void jsonQtNotes::PrintPatients()
 {
     if (this->id && this->email) {
-        QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_patients_by_ortho/" + QString(*this->id))));
+        QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_patient_by_ortho/" + QString(*this->id))));
         QNetworkAccessManager *q_network_manager = new QNetworkAccessManager(this);
         QNetworkReply *reply;// = q_network_manager.get(request);
 
@@ -63,13 +65,15 @@ void jsonQtNotes::PrintPatients()
         QString response_data = reply->readAll();
         QJsonDocument json_document = QJsonDocument::fromJson(response_data.toUtf8());
         ui->connection_get->setText(json_document.toJson());
-    }
+    } else
+        ui->connection_get->setText("il n'y a pas de patients.");
 }
 
 void jsonQtNotes::on_connection_clicked()
 {
     qDebug() << "recuperation des infos email: " << ui->email->toPlainText() << "et password:" << ui->password->toPlainText();
     ConnectOrthoJsonByAllOtrhos(ui->email->toPlainText(), ui->password->toPlainText());
+    PrintPatients();
 }
 
 bool jsonQtNotes::CheckLogin(QJsonDocument & json_document, QString & email, QString & password)
