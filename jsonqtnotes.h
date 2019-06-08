@@ -20,7 +20,7 @@ public:
     explicit jsonQtNotes(QWidget *parent = nullptr);
     ~jsonQtNotes();
     void ConnectOrthoJsonByAllOtrhos(QString email, QString password); //deprecated before email
-    bool CheckLogin(QJsonDocument & json, QString email, QString password);
+    bool CheckLogin(QJsonDocument & json, QString & email, QString & password);
 
 private slots:
     void on_connection_clicked();

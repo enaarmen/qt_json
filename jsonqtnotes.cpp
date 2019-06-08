@@ -55,9 +55,9 @@ void jsonQtNotes::on_connection_clicked()
     ConnectOrthoJsonByAllOtrhos(ui->email->toPlainText(), ui->password->toPlainText());
 }
 
-bool jsonQtNotes::CheckLogin(QJsonDocument & json, QString email, QString password)
+bool jsonQtNotes::CheckLogin(QJsonDocument & json_document, QString & email, QString & password)
 {
-    for (auto it = json.array().begin(); it != json.array().end(); ++it) {
+    for (auto it = json_document.array().begin(); it != json_document.array().end(); ++it) {
         qDebug() << "iterateur:" << (*it);
         QJsonObject json = (*it).toObject();
         if (!json.value("email").toString().compare(email) && !json.value("password").toString().compare(password)) {
