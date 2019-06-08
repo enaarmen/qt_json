@@ -1,6 +1,8 @@
 #ifndef JSONQTNOTES_H
 #define JSONQTNOTES_H
 
+#include <QJsonDocument>
+#include <QString>
 #include <QtCore>
 #include <QWidget>
 
@@ -17,14 +19,16 @@ class jsonQtNotes : public QWidget
 public:
     explicit jsonQtNotes(QWidget *parent = nullptr);
     ~jsonQtNotes();
-    void ConnectOrthoJsonByAllOtrhos(QString email, QString password);
+    void ConnectOrthoJsonByAllOtrhos(QString email, QString password); //deprecated before email
+    bool CheckLogin(QJsonDocument & json, QString email, QString password);
 
 private slots:
     void on_connection_clicked();
 
 private:
     Ui::jsonQtNotes *ui;
-
+    QString         id;
+    QString         email;
 };
 
 #endif // JSONQTNOTES_H
