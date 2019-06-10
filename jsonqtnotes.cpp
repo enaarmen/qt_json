@@ -30,10 +30,9 @@ bool jsonQtNotes::ConnectOrthoJsonByAllOtrhos(QString email, QString password)
         return (false);
     QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_all_ortho")));
     QNetworkAccessManager *q_network_manager = new QNetworkAccessManager(this);
-    QNetworkReply *reply;// = q_network_manager.get(request);
-
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    reply = q_network_manager->get(request);
+    QNetworkReply *reply = q_network_manager->get(request);
+    //reply = q_network_manager->get(request);
 
     while (!reply->isFinished())
         qApp->processEvents();
@@ -58,10 +57,10 @@ bool jsonQtNotes::PrintPatients()
     if (this->id && this->email) {
         QNetworkRequest request(QUrl(QString(BASE_URL) + QString("/get_patient_by_ortho/") + *this->id));
         QNetworkAccessManager *q_network_manager = new QNetworkAccessManager(this);
-        QNetworkReply *reply;// = q_network_manager.get(request);
-
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-        reply = q_network_manager->get(request);
+        QNetworkReply *reply = q_network_manager->get(request);
+
+        //reply = q_network_manager->get(request);
         while (!reply->isFinished())
             qApp->processEvents();
         QString response_data = reply->readAll();
