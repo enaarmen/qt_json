@@ -19,12 +19,14 @@ class jsonQtNotes : public QWidget
 public:
     explicit jsonQtNotes(QWidget *parent = nullptr);
     ~jsonQtNotes();
-    void ConnectOrthoJsonByAllOtrhos(QString email, QString password); //deprecated before email
+    bool ConnectOrthoJsonByAllOtrhos(QString email, QString password); //deprecated before email
     bool CheckLogin(QJsonDocument & json, QString & email, QString & password);
-    void PrintPatients();
+    bool PrintPatients();
 
 private slots:
     void on_connection_clicked();
+
+    void on_deconnection_clicked();
 
 private:
     Ui::jsonQtNotes *ui;
